@@ -6,8 +6,12 @@ This Repository is Infrastructure Integration for Cloud using below IaC.
 - TypeScript Code using AWS CDK
 - AWS Cloudformation yaml Code
 
-# usage
+# Usage
 
 ## AWS Cloudformation
 
-Use `CloudFormation_main.yml` for CloudFormation Stack Template.
+Use `main-cfn.yml` for CloudFormation Stack Template.
+
+# Note
+
+- CloudFormation yaml file's name is recommended `*-cfn.yml` or `*-template.yml`, because of cfn-lint.
