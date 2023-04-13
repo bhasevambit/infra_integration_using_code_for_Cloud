@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Resources:
+
+  # VPC
+  CfnSampleVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: "10.0.0.0/16"
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      InstanceTenancy: "default"
+      Tags:
+        - Key: "Name"
+          Value: "CfnSampleVPC"
+ 
+  # Subnet
+  CfnSamplePublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      AvailabilityZone: !Select
+        - 0
+        - !GetAZs 
+          Ref: AWS::Region
+      CidrBlock: !Select [ 0, !Cidr [ !GetAtt CfnSampleVPC.CidrBlock, 2, 8 ]]
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: "Name"
+          Value: "CfnSamplePublicSubnet"
+      VpcId: !Ref CfnSampleVPC
+
+  # RouteTable
+  CfnSampleRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      Tags:
+        - Key: "Name"
+          Value: "CfnSampleRouteTable"
+      VpcId: !Ref CfnSampleVPC
+
+  # RouteTableAssociation
+  CfnSampleRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref CfnSampleRouteTable
+      SubnetId: !Ref CfnSamplePublicSubnet
