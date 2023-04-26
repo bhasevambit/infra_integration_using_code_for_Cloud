@@ -12,5 +12,11 @@ class AwsCdkTrainingForPythonStack(cdk.Stack):
             bucket_name="first-s3-bucket-by-cdk-353981446712",
             versioned=True,
             removal_policy=cdk.RemovalPolicy.DESTROY,
-            auto_delete_objects=True
+            auto_delete_objects=True,
+            block_public_access=s3.BlockPublicAccess(
+                block_public_acls=True,
+                block_public_policy=True,
+                ignore_public_acls=True,
+                restrict_public_buckets=True
+            )
         )
