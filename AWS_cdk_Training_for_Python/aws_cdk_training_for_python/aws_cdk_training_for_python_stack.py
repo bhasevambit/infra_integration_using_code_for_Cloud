@@ -8,8 +8,8 @@ class AwsCdkTrainingForPythonStack(cdk.Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         bucket = s3.Bucket(
-            self, "first-s3-bucket-by-cdk",
-            bucket_name="first-s3-bucket-by-cdk-353981446712",
+            self, "first-s3-bucket-by-cdk-python",
+            bucket_name="first-s3-bucket-by-cdk-python-353981446712",
             versioned=True,
             removal_policy=cdk.RemovalPolicy.DESTROY,
             auto_delete_objects=True,
